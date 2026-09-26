@@ -1,0 +1,7 @@
+fastapi>=0.115,<1
+uvicorn[standard]>=0.34,<1
+httpx>=0.28,<1
+pydantic>=2.10,<3
+python-dotenv>=1.0,<2
+# tests
+pytest>=8

@@ -1,0 +1,18 @@
+# Render blueprint: https://render.com/docs/blueprint-spec
+# One web service, one process. Games live in memory, so don't add workers
+# or instances without adding shared storage first.
+services:
+  - type: web
+    name: jev-wordle
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --app-dir backend --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: OPENJEV_API_KEY
+        sync: false # you paste the key in Render's dashboard; it never goes in git
+      - key: TRUST_PROXY_HEADERS
+        value: "1" # Render's proxy sets X-Forwarded-For; without this every player shares one rate limit
+      - key: PYTHON_VERSION
+        value: 3.12.6

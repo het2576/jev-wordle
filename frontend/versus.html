@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>You vs Jev</title>
+  <meta name="description" content="Race Jev to the same secret Wordle word. You guess, then Jev makes one typed choice from a strong shortlist. Fewest guesses wins.">
+  <meta name="theme-color" content="#1A1524">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231A1524'/%3E%3Crect x='5' y='11' width='6' height='10' rx='1' fill='%234FA06A'/%3E%3Crect x='13' y='11' width='6' height='10' rx='1' fill='%23D4A73A'/%3E%3Crect x='21' y='11' width='6' height='10' rx='1' fill='%23433B52'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar-wrap">
+    <div class="topbar">
+      <a class="brand" href="/" aria-label="Jev Wordle home">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>Jev Wordle</span>
+      </a>
+      <nav class="mode-nav" aria-label="Mode">
+        <a href="/">Watch Jev</a>
+        <a href="/versus" aria-current="page">You vs Jev</a>
+      </nav>
+      <div class="controls">
+        <button class="btn btn-quiet" id="new-match" type="button">New match</button>
+        <label class="switch" title="Orange and blue instead of green and yellow">
+          <input type="checkbox" id="contrast">
+          <span class="switch-track" aria-hidden="true"></span>
+          <span><span class="long-label">High contrast</span><span class="short-label">Contrast</span></span>
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <section class="scorebar" aria-label="Score">
+    <div class="side side-you">
+      <span class="avatar avatar-you" aria-hidden="true">You</span>
+      <span><span class="side-name">You</span><span class="side-sub" id="you-sub">Your move</span></span>
+      <span class="side-score" id="score-you" aria-label="Your wins">0</span>
+    </div>
+    <p class="round-pill" id="round-pill">Round <b>1</b> of 6</p>
+    <div class="side side-jev" id="side-jev">
+      <span class="side-score" id="score-jev" aria-label="Jev's wins">0</span>
+      <span class="side-text"><span class="side-name">Jev</span><span class="side-sub" id="jev-sub">Waiting for you</span></span>
+      <span class="avatar avatar-jev" aria-hidden="true">J</span>
+    </div>
+  </section>
+
+  <main class="versus-stage">
+    <section class="you-panel play" aria-label="Your board">
+      <div class="board-wrap">
+        <div class="board" id="board" role="grid"></div>
+        <ol class="left-col" id="left-col" aria-label="Common words still possible after each of your guesses"></ol>
+      </div>
+      <p class="narrator" id="narrator" aria-live="polite">Loading a new match…</p>
+      <div class="keyboard" id="keyboard" aria-label="Keyboard"></div>
+    </section>
+
+    <aside class="rack jev-panel is-live" id="jev-panel" aria-labelledby="jev-title">
+      <div class="rack-head">
+        <h2 id="jev-title">Jev's board</h2>
+        <nav class="turn-tabs" id="turn-tabs" aria-label="Review Jev's turns"></nav>
+      </div>
+      <p class="jev-status" id="jev-status" aria-live="polite">Jev plays after you each round.</p>
+      <div class="jev-board-wrap">
+        <div class="board is-small" id="jev-board" role="grid"></div>
+      </div>
+      <ol class="rack-list" id="jev-list"></ol>
+      <p class="fairness">Same secret word for both of you. You see Jev's colours, never its letters; Jev sees nothing of yours. Everything is revealed when the match ends.</p>
+    </aside>
+  </main>
+
+  <footer class="colophon">
+    <p>Each round, Jev makes one typed <code>choice</code> from a heuristic shortlist, the same as in Watch Jev. Solve in fewer guesses to win. Solving in the same round is a draw.</p>
+  </footer>
+
+  <dialog class="sheet" id="sheet" aria-labelledby="sheet-title">
+    <div class="sheet-body" id="sheet-body"></div>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="assertive"></div>
+
+  <script src="shared.js"></script>
+  <script src="versus.js"></script>
+</body>
+</html>

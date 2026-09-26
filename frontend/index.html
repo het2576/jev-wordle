@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jev Wordle</title>
+  <meta name="description" content="Wordle played by Jev: every guess is one typed choice from a short list of strong words, with the full probability spread shown before the tiles flip.">
+  <meta name="theme-color" content="#1C1726">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231C1726'/%3E%3Crect x='5' y='11' width='6' height='10' rx='1' fill='%234FA06A'/%3E%3Crect x='13' y='11' width='6' height='10' rx='1' fill='%23D4A73A'/%3E%3Crect x='21' y='11' width='6' height='10' rx='1' fill='%23433B52'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar-wrap">
+   <div class="topbar">
+    <a class="brand" href="/" aria-label="Jev Wordle home">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span>Jev Wordle</span>
+    </a>
+    <nav class="mode-nav" aria-label="Mode">
+      <a href="/" aria-current="page">Watch Jev</a>
+      <a href="/versus">You vs Jev</a>
+    </nav>
+    <div class="controls">
+      <button class="btn btn-quiet" id="new-game" type="button">New game</button>
+      <label class="switch" title="Play turns back to back (A)">
+        <input type="checkbox" id="auto-play">
+        <span class="switch-track" aria-hidden="true"></span>
+        <span>Auto-play</span>
+      </label>
+      <label class="switch" title="Orange and blue instead of green and yellow">
+        <input type="checkbox" id="contrast">
+        <span class="switch-track" aria-hidden="true"></span>
+        <span><span class="long-label">High contrast</span><span class="short-label">Contrast</span></span>
+      </label>
+    </div>
+   </div>
+  </header>
+
+  <main class="stage">
+    <section class="play" aria-label="Game board">
+      <div class="board-wrap">
+        <div class="board" id="board" role="grid" aria-label="Guesses, 6 rows of 5 letters"></div>
+        <ol class="left-col" id="left-col" aria-label="Common words still possible after each guess"></ol>
+      </div>
+      <p class="narrator" id="narrator" aria-live="polite">Jev is ready to play.</p>
+      <div class="keyboard" id="keyboard" aria-label="Letters tried so far"></div>
+    </section>
+
+    <aside class="rack" id="rack" aria-labelledby="rack-title">
+      <div class="rack-head">
+        <h2 id="rack-title">Jev's shortlist</h2>
+        <nav class="turn-tabs" id="turn-tabs" aria-label="Review earlier turns"></nav>
+      </div>
+      <p class="rack-sub" id="rack-sub">Each turn, Jev picks one word from a short list of strong options. The probability it gives every word appears here before the tiles flip.</p>
+      <ol class="rack-list" id="rack-list"></ol>
+      <section class="results" id="results" hidden aria-live="polite"></section>
+      <div class="rack-foot">
+        <p class="rack-meta" id="rack-meta"></p>
+        <button class="btn btn-primary" id="play-turn" type="button">Play turn 1</button>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="colophon">
+    <p>Each turn: a heuristic shortlist of words, one typed <code>choice</code> call to Jev, and Jev's pick played as is. It's not an optimal solver.</p>
+  </footer>
+
+  <div class="flight-layer" id="flight-layer" aria-hidden="true"></div>
+  <script src="shared.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
